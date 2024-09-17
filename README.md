@@ -7,60 +7,91 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+## Notify - Envoi de notifications en temps réel
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Notify est une application web Laravel qui permet l'envoi de notifications en temps réel à un administrateur lorsque des utilisateurs créent de nouvelles publications. Le système utilise Reverb pour les notifications en temps réel.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Fonctionnalités
 
-## Learning Laravel
+Système d'authentification - Implémenté via l'interface utilisateur de Laravel (UI).
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Gestion des utilisateurs - Deux types d'utilisateurs : super administrateur et utilisateur normal, identifiés par une colonne is_admin dans la table des utilisateurs.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Gestion des publications - Les utilisateurs peuvent créer des publications avec un titre et un corps.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Notifications en temps réel - À la création d'une publication, une notification en temps réel est envoyée à l'administrateur à l'aide de Reverb.
 
-## Laravel Sponsors
+## Prérequis
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Avant de commencer, assurez-vous d'avoir installé les éléments suivants :
 
-### Premium Partners
+PHP >= 8.0
+Composer
+MySQL
+Node.js & NPM
+Laravel 9.x
+Reverb (pour les notifications en temps réel)
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+### Installation
+Clonez le dépôt :
 
-## Contributing
+bash
+git clone https://github.com/votre-utilisateur/notify.git
+cd notify
+Installez les dépendances PHP via Composer :
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+bash
+composer install
+Configurez le fichier .env :
 
-## Code of Conduct
+bash
+cp .env.example .env
+php artisan key:generate
+Configurez votre base de données dans .env.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Installez les dépendances front-end avec NPM :
 
-## Security Vulnerabilities
+bash
+npm install
+npm run dev
+Exécutez les migrations :
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+bash
+php artisan migrate
+Démarrez le serveur :
+
+bash
+php artisan serve
+
+## Fonctionnalités détaillées
+
+1. Authentification Laravel UI
+Nous avons configuré un système d'authentification pour permettre aux utilisateurs de se connecter et de s'inscrire.
+
+
+2. Gestion des utilisateurs
+Les utilisateurs sont distingués en super administrateurs et utilisateurs normaux grâce à une colonne is_admin dans la table users.
+L'administrateur reçoit des notifications lorsque de nouvelles publications sont créées.
+
+3. Tableau des publications
+Les utilisateurs peuvent créer, modifier et supprimer des publications contenant un titre et un corps.
+
+
+4. Notifications en temps réel avec Reverb
+Lorsqu'un utilisateur crée une publication, un événement PostCreated est déclenché, ce qui envoie une notification en temps réel à l'administrateur via Reverb.
+
+## Reverb - Configuration
+
+Nous utilisons Reverb pour gérer les notifications en temps réel dans cette application. Assurez-vous d'avoir installé et configuré Reverb en suivant la documentation officielle.
+
+## Contribution
+
+Si vous souhaitez contribuer à ce projet, n'hésitez pas à soumettre une Pull Request ou à ouvrir une issue.
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Ce projet est sous licence MIT.
+
+## Auteurs
+Khalil Djao - kobsdevs
